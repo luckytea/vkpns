@@ -28,39 +28,39 @@ type Push struct {
 
 // Структура push-уведомления.
 type Message struct {
-	Token        string            `json:"token"`        // Push-токен пользователя, полученный в приложении.
-	Data         map[string]string `json:"data"`         // Объект, содержащий пары "key": value.
-	Notification Notification      `json:"notification"` // Базовый шаблон уведомления для использования на всех платформах.
-	Android      Android           `json:"android"`      // Специальные параметры Android для сообщений.
+	Token        string            `json:"token"`                  // Push-токен пользователя, полученный в приложении.
+	Data         map[string]string `json:"data,omitempty"`         // Объект, содержащий пары "key": value.
+	Notification Notification      `json:"notification,omitempty"` // Базовый шаблон уведомления для использования на всех платформах.
+	Android      Android           `json:"android,omitempty"`      // Специальные параметры Android для сообщений.
 }
 
 type Notification struct {
-	Title string `json:"title"` // Название уведомления.
-	Body  string `json:"body"`  // Основной текст уведомления.
-	Image string `json:"image"` // Содержит URL-адрес изображения, которое будет отображаться в уведомлении.
+	Title string `json:"title,omitempty"` // Название уведомления.
+	Body  string `json:"body,omitempty"`  // Основной текст уведомления.
+	Image string `json:"image,omitempty"` // Содержит URL-адрес изображения, которое будет отображаться в уведомлении.
 }
 
 type Android struct {
-	TTL          string              `json:"ttl"`          // Как долго (в секундах) сообщение должно храниться в хранилище. Пример: 3.5s.
-	Notification AndroidNotification `json:"notification"` // Уведомление для отправки на устройства Android.
+	TTL          string              `json:"ttl,omitempty"`          // Как долго (в секундах) сообщение должно храниться в хранилище. Пример: 3.5s.
+	Notification AndroidNotification `json:"notification,omitempty"` // Уведомление для отправки на устройства Android.
 }
 
 type AndroidNotification struct {
-	Title           string `json:"title"`              // Название уведомления.
-	Body            string `json:"body"`               // Основной текст уведомления.
-	Icon            string `json:"icon"`               // Значок уведомления..
-	Color           string `json:"color"`              // Цвет значка уведомления в формате #rrggbb.
-	Image           string `json:"image" `             // Содержит URL-адрес изображения, которое будет отображаться в уведомлении.
-	ChannelID       string `json:"channel_id"`         // Идентификатор канала уведомления.
-	ClickAction     string `json:"click_action" `      // Действие, связанное с кликом пользователя по уведомлению.
-	ClickActionType int    `json:"click_action_type" ` // Необязательное поле, тип click_action (значение по умолчанию 0 - click_action будет использоваться как intent action, 1 - click_action будет использоваться как deep link).
+	Title           string `json:"title,omitempty"`             // Название уведомления.
+	Body            string `json:"body,omitempty"`              // Основной текст уведомления.
+	Icon            string `json:"icon,omitempty"`              // Значок уведомления..
+	Color           string `json:"color,omitempty"`             // Цвет значка уведомления в формате #rrggbb.
+	Image           string `json:"image,omitempty"`             // Содержит URL-адрес изображения, которое будет отображаться в уведомлении.
+	ChannelID       string `json:"channel_id,omitempty"`        // Идентификатор канала уведомления.
+	ClickAction     string `json:"click_action,omitempty"`      // Действие, связанное с кликом пользователя по уведомлению.
+	ClickActionType int    `json:"click_action_type,omitempty"` // Необязательное поле, тип click_action (значение по умолчанию 0 - click_action будет использоваться как intent action, 1 - click_action будет использоваться как deep link).
 }
 
 // Response - ответ сервиса.
 type Response struct {
 	Code    int    `json:"code"`    // Числовой код ошибки.
 	Message string `json:"message"` // Детальное описание ошибки.
-	Status  string `json:"status" ` // Код ошибки в текстовом формате.
+	Status  string `json:"status"`  // Код ошибки в текстовом формате.
 }
 
 const (
